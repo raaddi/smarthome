@@ -1,0 +1,4 @@
+*.pdf binary
+*.mp4 binary
+*.stl binary
+*.mov filter=lfs diff=lfs merge=lfs -text

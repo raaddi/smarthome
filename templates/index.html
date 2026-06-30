@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHome - panel sterowania</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f5f7fa;
+      --surface: #ffffff;
+      --text: #1f2933;
+      --muted: #62707f;
+      --border: #d9e1ea;
+      --primary: #2457a6;
+      --primary-dark: #173f7f;
+      --danger: #a63a3a;
+      --success: #1f7a4d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    main {
+      width: min(960px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+    }
+
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .status.ok {
+      color: var(--success);
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    section {
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 20px;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .control-row span {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+    }
+
+    button.secondary {
+      border: 1px solid var(--border);
+      background: #eef2f7;
+      color: var(--text);
+    }
+
+    button.secondary:hover {
+      background: #dfe7f0;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>SmartHome</h1>
+        <div>Panel sterowania makietą inteligentnego domu</div>
+      </div>
+      <div id="status" class="status">Gotowy do wysyłania poleceń</div>
+    </header>
+
+    <section>
+      <h2>Serwomechanizmy</h2>
+      <div class="control-grid" id="servo-controls"></div>
+    </section>
+
+    <section>
+      <h2>Oświetlenie LED</h2>
+      <div class="control-grid" id="led-controls"></div>
+    </section>
+
+    <footer>
+      Praca inżynierska: system inteligentnego domu na przykładzie fizycznej makiety w środowisku Arduino IDE
+    </footer>
+  </main>
+
+  <script>
+    const servos = [
+      ["Garaż A", 1],
+      ["Garaż B", 2],
+      ["Brama wjazdowa A", 3],
+      ["Brama wjazdowa B", 4],
+      ["Drzwi wejściowe", 5],
+      ["Bramka wejściowa", 6],
+    ];
+
+    const statusElement = document.querySelector("#status");
+    const servoControls = document.querySelector("#servo-controls");
+    const ledControls = document.querySelector("#led-controls");
+
+    function setStatus(message, className = "") {
+      statusElement.textContent = message;
+      statusElement.className = `status ${className}`.trim();
+    }
+
+    async function sendCommand(endpoint, successMessage) {
+      try {
+        const response = await fetch(endpoint);
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        setStatus(successMessage, "ok");
+      } catch (error) {
+        setStatus(`Nie udało się wysłać polecenia: ${error.message}`, "error");
+      }
+    }
+
+    function createControlRow(label, closeAction, openAction) {
+      const row = document.createElement("div");
+      row.className = "control-row";
+      row.innerHTML = `
+        <span>${label}</span>
+        <button class="secondary" type="button">Zamknij</button>
+        <button type="button">Otwórz</button>
+      `;
+
+      row.children[1].addEventListener("click", closeAction);
+      row.children[2].addEventListener("click", openAction);
+      return row;
+    }
+
+    servos.forEach(([label, servoId]) => {
+      servoControls.appendChild(createControlRow(
+        label,
+        () => sendCommand(`/servo/${servoId}/0`, `${label}: zamknięto`),
+        () => sendCommand(`/servo/${servoId}/110`, `${label}: otwarto`),
+      ));
+    });
+
+    for (let ledId = 1; ledId <= 10; ledId += 1) {
+      ledControls.appendChild(createControlRow(
+        `LED ${ledId}`,
+        () => sendCommand(`/led/${ledId}/0`, `LED ${ledId}: wyłączono`),
+        () => sendCommand(`/led/${ledId}/1`, `LED ${ledId}: włączono`),
+      ));
+    }
+  </script>
+</body>
+</html>

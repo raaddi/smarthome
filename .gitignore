@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+.env
+.env.*
+
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+/Kod źródłowy/
+/Czujniki gazu.mp4
+/Lesiewicz_inz.pdf
+/Zdalne sterowanie.mov
+
+*.kicad_prl~
+*.kicad_sch-bak
+*-backups/
