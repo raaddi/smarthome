@@ -42,7 +42,7 @@ Arduino Mega 2560
 ├── hardware/kicad/SmartHome/      # Schematy KiCad
 ├── hardware/models/               # Model STL makiety
 ├── docs/Lesiewicz_inz.pdf         # Praca inżynierska
-└── media/czujniki-gazu.mp4        # Krótka demonstracja detekcji gazu
+└── media/                         # Nagrania demonstracyjne
 ```
 
 ## Uruchomienie aplikacji
@@ -94,8 +94,7 @@ LED 3 0
 - Model STL makiety znajduje się w `hardware/models/STL_Smarthome.stl`.
 - Pełny opis projektu znajduje się w `docs/Lesiewicz_inz.pdf`.
 - Nagranie `media/czujniki-gazu.mp4` pokazuje działanie czujników gazu.
-
-Duży plik demonstracyjny `Zdalne sterowanie.mov` ma około 615 MB, dlatego nie został dodany do repozytorium Git. Najlepsze opcje publikacji to GitHub Releases albo Git LFS.
+- Nagranie `media/zdalne-sterowanie.mp4` pokazuje zdalne sterowanie makietą i jest przechowywane przez Git LFS.
 
 ## Sugerowany opis repozytorium na GitHubie
 
