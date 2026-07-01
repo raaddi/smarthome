@@ -41,7 +41,6 @@ Arduino Mega 2560
 ├── firmware/smarthome/            # Program dla Arduino Mega 2560
 ├── hardware/kicad/SmartHome/      # Schematy KiCad
 ├── hardware/models/               # Model STL makiety
-├── docs/Lesiewicz_inz.pdf         # Praca inżynierska
 └── media/                         # Nagrania demonstracyjne
 ```
 
@@ -92,6 +91,5 @@ LED 3 0
 
 - Schematy KiCad znajdują się w `hardware/kicad/SmartHome`.
 - Model STL makiety znajduje się w `hardware/models/STL_Smarthome.stl`.
-- Pełny opis projektu znajduje się w `docs/Lesiewicz_inz.pdf`.
 - Nagranie `media/czujniki-gazu.mp4` pokazuje działanie czujników gazu.
 - Nagranie `media/zdalne-sterowanie.mp4` pokazuje zdalne sterowanie makietą i jest przechowywane przez Git LFS.
