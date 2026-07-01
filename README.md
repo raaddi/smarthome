@@ -95,9 +95,3 @@ LED 3 0
 - Pełny opis projektu znajduje się w `docs/Lesiewicz_inz.pdf`.
 - Nagranie `media/czujniki-gazu.mp4` pokazuje działanie czujników gazu.
 - Nagranie `media/zdalne-sterowanie.mp4` pokazuje zdalne sterowanie makietą i jest przechowywane przez Git LFS.
-
-## Sugerowany opis repozytorium na GitHubie
-
-> Physical smart home model built with Arduino Mega 2560, Raspberry Pi 3, Flask, MQ-9 gas sensors, servos, LED lighting and KiCad hardware files.
-
-Sugerowane tematy: `arduino`, `raspberry-pi`, `flask`, `smart-home`, `iot`, `kicad`, `3d-printing`, `engineering-thesis`.
