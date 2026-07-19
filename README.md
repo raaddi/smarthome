@@ -1,54 +1,54 @@
-# SmartHome - fizyczna makieta inteligentnego domu
+# SmartHome - Physical Smart Home Model
 
-Repozytorium zawiera projekt inżynierski **"System inteligentnego domu na przykładzie fizycznej makiety w środowisku Arduino IDE"**. System łączy mikrokontroler Arduino Mega 2560, Raspberry Pi 3, aplikację webową Flask, serwomechanizmy, oświetlenie LED, czujniki gazu MQ-9 oraz wentylatory.
+This repository contains a physical smart home model built as an engineering project. The system combines an Arduino Mega 2560, a Raspberry Pi 3, a Flask web application, servos, LED lighting, MQ-9 gas sensors and ventilation fans.
 
-Projekt pokazuje działanie wybranych funkcji smart home na fizycznej makiecie: zdalne sterowanie bramami i drzwiami, sterowanie oświetleniem oraz automatyczne uruchamianie wentylacji po wykryciu gazu.
+The project demonstrates selected smart home functions on a working scale model: remote control of gates and doors, LED lighting control, gas detection and automatic ventilation after a sensor threshold is exceeded.
 
-## Funkcje
+## Features
 
-- Zdalne sterowanie makietą przez panel WWW.
-- Otwieranie i zamykanie 6 elementów za pomocą serwomechanizmów.
-- Włączanie i wyłączanie 10 punktów oświetlenia LED.
-- Detekcja gazu z 4 czujników MQ-9.
-- Automatyczne sterowanie 4 wentylatorami po przekroczeniu progu odczytu z czujnika.
-- Komunikacja Raspberry Pi z Arduino przez port szeregowy USB.
+- Remote control through a web-based dashboard.
+- Opening and closing of 6 physical elements using servos.
+- Control of 10 LED lighting points.
+- Gas detection using 4 MQ-9 sensors.
+- Automatic control of 4 ventilation fans based on gas sensor readings.
+- Serial communication between Raspberry Pi and Arduino over USB.
 
-## Architektura
+## Architecture
 
 ```text
-Telefon / laptop
+Phone / laptop
       |
       | HTTP
       v
-Panel WWW Flask na Raspberry Pi
+Flask web dashboard on Raspberry Pi
       |
       | USB serial: SERVO / LED
       v
 Arduino Mega 2560
       |
-      +-- serwomechanizmy
-      +-- diody LED
-      +-- czujniki MQ-9
-      +-- wentylatory
+      +-- servos
+      +-- LED lighting
+      +-- MQ-9 gas sensors
+      +-- ventilation fans
 ```
 
-## Struktura repozytorium
+## Repository Structure
 
 ```text
 .
-├── app.py                         # Backend Flask i komunikacja po porcie szeregowym
-├── templates/index.html           # Panel sterowania
-├── firmware/smarthome/            # Program dla Arduino Mega 2560
-├── hardware/kicad/SmartHome/      # Schematy KiCad
-├── hardware/models/               # Model STL makiety
-└── media/                         # Nagrania demonstracyjne
+|-- app.py                         # Flask backend and serial communication
+|-- templates/index.html           # Web control panel
+|-- firmware/smarthome/            # Arduino Mega 2560 firmware
+|-- hardware/kicad/SmartHome/      # KiCad schematics
+|-- hardware/models/               # STL model files
+`-- media/                         # Demo videos
 ```
 
-## Uruchomienie aplikacji
+## Running the Application
 
-1. Wgraj program `firmware/smarthome/smarthome.ino` na Arduino Mega 2560 w Arduino IDE.
-2. Podłącz Arduino do Raspberry Pi lub komputera przez USB.
-3. Utwórz środowisko Python i zainstaluj zależności:
+1. Upload `firmware/smarthome/smarthome.ino` to the Arduino Mega 2560 using Arduino IDE.
+2. Connect the Arduino to a Raspberry Pi or computer over USB.
+3. Create a Python virtual environment and install the dependencies:
 
 ```powershell
 python -m venv .venv
@@ -56,30 +56,30 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-4. Ustaw port szeregowy, jeśli różni się od domyślnego `/dev/ttyACM0`:
+4. Set the serial port if it is different from the default `/dev/ttyACM0`:
 
 ```powershell
 $env:SERIAL_PORT = "COM3"
 ```
 
-5. Uruchom aplikację:
+5. Start the Flask application:
 
 ```powershell
 python app.py
 ```
 
-Panel będzie dostępny pod adresem `http://localhost:5000`. Na Raspberry Pi w tej samej sieci można użyć adresu IP urządzenia, np. `http://192.168.1.20:5000`.
+The dashboard will be available at `http://localhost:5000`. On a Raspberry Pi connected to the same network, use the device IP address, for example `http://192.168.1.20:5000`.
 
-## Protokół komunikacji
+## Communication Protocol
 
-Aplikacja Flask wysyła do Arduino proste komendy tekstowe zakończone znakiem nowej linii:
+The Flask application sends simple text commands to the Arduino over serial communication. Each command ends with a newline character.
 
 ```text
-SERVO <id> <pozycja>
-LED <id> <stan>
+SERVO <id> <position>
+LED <id> <state>
 ```
 
-Przykłady:
+Examples:
 
 ```text
 SERVO 1 110
@@ -87,9 +87,9 @@ LED 3 1
 LED 3 0
 ```
 
-## Materiały projektowe
+## Project Materials
 
-- Schematy KiCad znajdują się w `hardware/kicad/SmartHome`.
-- Model STL makiety znajduje się w `hardware/models/STL_Smarthome.stl`.
-- Nagranie `media/czujniki-gazu.mp4` pokazuje działanie czujników gazu.
-- Nagranie `media/zdalne-sterowanie.mp4` pokazuje zdalne sterowanie makietą i jest przechowywane przez Git LFS.
+- KiCad schematics are available in `hardware/kicad/SmartHome`.
+- The STL model is available in `hardware/models/STL_Smarthome.stl`.
+- `media/czujniki-gazu.mp4` demonstrates gas sensor detection.
+- `media/zdalne-sterowanie.mp4` demonstrates remote control of the model and is stored using Git LFS.
