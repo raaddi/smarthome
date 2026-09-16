@@ -4,6 +4,12 @@ This repository contains a physical smart home model built as an engineering pro
 
 The project demonstrates selected smart home functions on a working scale model: remote control of gates and doors, LED lighting control, gas detection and automatic ventilation after a sensor threshold is exceeded.
 
+<p align="center">
+  <a href="media/images/README.md"><img src="media/images/physical-model/top-view.jpg" alt="Top view of the physical smart home model with room partitions, gas sensors, ventilation fans and LED lighting" width="560"></a>
+</p>
+
+[View the project gallery](media/images/README.md) for photos of the completed model, electronics, 3D renders, circuit schematics and the web dashboard.
+
 ## Features
 
 - Remote control through a web-based dashboard.
@@ -41,7 +47,8 @@ Arduino Mega 2560
 |-- firmware/smarthome/            # Arduino Mega 2560 firmware
 |-- hardware/kicad/SmartHome/      # KiCad schematics
 |-- hardware/models/               # STL model files
-`-- media/                         # Demo videos
+`-- media/                         # Demo videos and project images
+    `-- images/                    # Photo gallery, 3D renders and schematics
 ```
 
 ## Running the Application
@@ -89,6 +96,7 @@ LED 3 0
 
 ## Project Materials
 
+- [Project gallery](media/images/README.md): 17 photos, renders and screenshots documenting the model and its hardware.
 - KiCad schematics are available in `hardware/kicad/SmartHome`.
 - The STL model is available in `hardware/models/STL_Smarthome.stl`.
 - `media/czujniki-gazu.mp4` demonstrates gas sensor detection.
