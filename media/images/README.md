@@ -14,7 +14,7 @@ The model includes room partitions, a driveway, gates, doors, LED lighting, MQ-9
 
 | Room layout and sensors | Entrance and driveway |
 | --- | --- |
-| [<img src="physical-model/top-view.jpg" alt="Top view showing the room layout, gas sensors, ventilation fans and LEDs" width="360">](physical-model/top-view.jpg) | [<img src="physical-model/entrance-and-driveway.png" alt="View through the front gates toward the garage and entrance door" width="360">](physical-model/entrance-and-driveway.png) |
+| [<img src="physical-model/top-view.png" alt="Top view showing the room layout, gas sensors, ventilation fans and LEDs" width="360">](physical-model/top-view.png) | [<img src="physical-model/entrance-and-driveway.png" alt="View through the front gates toward the garage and entrance door" width="360">](physical-model/entrance-and-driveway.png) |
 
 ## Electronics and Mechanisms
 

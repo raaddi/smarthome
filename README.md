@@ -5,7 +5,7 @@ This repository contains a physical smart home model built as an engineering pro
 The project demonstrates selected smart home functions on a working scale model: remote control of gates and doors, LED lighting control, gas detection and automatic ventilation after a sensor threshold is exceeded.
 
 <p align="center">
-  <a href="media/images/README.md"><img src="media/images/physical-model/top-view.jpg" alt="Top view of the physical smart home model with room partitions, gas sensors, ventilation fans and LED lighting" width="560"></a>
+  <a href="media/images/README.md"><img src="media/images/physical-model/top-view.png" alt="Top view of the physical smart home model with room partitions, gas sensors, ventilation fans and LED lighting" width="560"></a>
 </p>
 
 [View the project gallery](media/images/README.md) for photos of the completed model, electronics, 3D renders, circuit schematics and the web dashboard.
